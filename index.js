@@ -1,9 +1,24 @@
+const auth = require("./assets/auth.js");
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
-const htpp = require("http").Server(app);
+const http = require("http").Server(app);
 const port = 3000;
 http.listen(port);
-console.log("Express");
+console.log("Express server running on" + port);
+console.log(auth.getDBURL());
 
-//$.post("http://localhost:3000/submitComment", data, (dataFromServer) => {
-  //                   console.log("The server has responded.");
+//ROUTES
+app.use(express.static("client/"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
+app.post("/login", (request, response) => {
+   let requestUsername = request.body;
+   let requestPassword = request.body;
+
+   console.log(requestUsername, requestPassword);
+
+   response.sendStatus(500);
+});
+
